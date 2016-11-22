@@ -448,7 +448,7 @@ System.registerDynamic("app/calc.js", ["@angular/core", "./Model"], true, functi
             // this.calcRemaining();
             //--------------------------------------------------------------
             //use newton formula to calculate when premiumYr does not equal withDrawYr
-            var guess = (Math.exp(Math.log(this.model.withDrawAmt / this.model.investAmt) / this.model.withDrawYr) - 1) * 100;
+            var guess = 100;
             if (this.model.premiumYr == this.model.withDrawYr) {
                 this.model.rewardPercent = guess;
             } else {
