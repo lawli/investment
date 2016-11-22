@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Investment</title>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>
+</head>
+
+<body>
+	<div style="display:flex;flex-direction:column">
+		<h2 style="margin:auto">投资复利计算</h2>
+		<h3>假定我们按以下设定场景进行投资并收取回报。</h3>
+		<ol>
+			<li>每年投入固定数量资金。</li>
+			<li>每年的投资回报率是固定的。</li>
+			<li>资金复利增长。</li>
+			<li>到一定年数后停止投资，开始收取回报，但是剩余资金仍然按复利增长，投资回报率不变。</li>
+			<li>每年收取的回报相同，直至资金枯竭。</li>
+		</ol>
+		<h3>变量定义：</h3>
+		<div>a = 每年的投资额, b = 每年收取的回报, m = 总投资年数, n = 收取回报年数</div>
+		<div>k = 投资回报率（例：如果回报率为5%, k = 1.05）</div>
+		<p>
+			<div>当投资停止时，积累的资金可推导如下：</div>
+			<div>第一年：\(a \times k\)</div>
+			<div>第二年：\((a \times k + a) \times k = ak^2 + ak = a(k^2 + k)\)</div>
+			<div>第三年：\((ak^2 + ak + a) \times k = ak^3 + ak^2 + ak = a(k^3 + k^2 +k)\)</div>
+			<div>&nbsp;&nbsp;....</div>
+			<div>第M年：\(a(k^m + k^{m-1} + k^{m-2} + .... + k) = a {k(k^m - 1) \over k - 1}\)</div>
+			<p>
+				<div>当开始收取回报后，资金的变化可推导如下：</div>
+				<div>设开始的资金为\(Q, Q = a {k(k^m - 1) \over k - 1}\)</div>
+				<div>第一年：\((Q - b) \times k = Qk - bk\)</div>
+				<div>第二年：\((Qk - bk - b) \times k = Qk^2 - bk^2 - bk\)</div>
+				<div>第三年：\((Qk^2 - bk^2 -bk - b) \times k = Qk^3 - bk^3 - bk^2 - bk\)</div>
+				<div>&nbsp;&nbsp;....</div>
+				<div>第N年：\(Qk^n - bk^n - bk^{n-1} - bk^{n-2} .... -bk = Qk^n - b {k(k^n - 1) \over k - 1}\)</div>
+				<div>因为收取回报一直到资金枯竭，所以</div>
+				<div>\(Qk^n - b{k(k^n - 1) \over k - 1} = 0\)，即\(b{k(k^n - 1) \over k - 1} = a {k(k^m - 1) \over k - 1}k^n, b(k^n - 1) = a(k^m - 1)k^n\)</div>
+				<div>有以上这个基本公式后，我们可作以下计算：</div>
+				<ol>
+					<li>
+						当知道回报率，投资年数，每年收取回报额，收取回报年数，求每年投资额<br>
+						\(a={b(k^n - 1) \over (k^m - 1)k^n}\)
+					</li>
+					<li>
+						当知道回报率，每年投资额，每年收取回报额，收取回报年数，求投资年数<br>
+						\(m={ln({b(k^n - 1) \over ak^n} + 1) \over ln(k)}\)
+					</li>
+					<li>
+						当知道回报率，每年投资额，投资年数，每年收取回报额，求取回报年数<br>
+						\(n={ln({b \over b - a(k^m - 1)}) \over ln(k)}\)
+					</li>
+					<li>
+						当知道回报率，每年投资额，投资年数，回报年数，求取每年回报额<br>
+						\(b={a(k^m - 1)k^n \over k^n - 1}\)
+					</li>
+					<li>
+						当知道每年投资额，投资年数，回报年数，每年回报额，求取回报率<br>
+						从基本公式我们可以推导出<br>
+						\(ak^{m+n} - ak^n - bk^n + b = 0\), 当a,b,m,n已知时，求k的解。<br>
+						对于高阶方程，没有直接的代数根解，但我们可以用牛顿迭代求近似解。<br>
+						设\(f(k)=ak^{m+n} - ak^n - bk^n + b = 0\)，则\(f'(k)=(m+n)ak^{m+n-1} - nak^{n-1} - bnk^{n-1}\)<br>
+						定义d为可以接受的误差，例如\(d=0.00001\)，取任意\(x_{0}, x'_{0}=x_{0} - {f(x_{0}) \over f'(x_{0})}\)，如果<br>
+						\(abs(x_{0} - x'_{0}) >= d\)，令\(x_{0} = x'_{0}, x'_{0}=x_{0} - {f(x_{0}) \over f'(x_{0})}\)。一直迭代到\(abs(x_{0} - x'_{0}) < d\)
+					</li>
+				</ol>
+	</div>
+
+</body>
+
+</html>
