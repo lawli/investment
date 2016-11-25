@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            <paper-input label="年投入" [(ngModel)]="model.investAmt"></paper-input>
+            <paper-input label="年投入" [ngModel]="model.investAmt? model.investAmt+'' : model.investAmt" (ngModelChange)="model.investAmt=$event"></paper-input>
         </div>
         <div class="col-sm-3">
             <paper-button raised (click)="calcInvestAmnt()" [disabled]="!canCalcInvestAmnt()">Calc</paper-button>
@@ -27,7 +27,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            <paper-input label="投资年数" [(ngModel)]="model.premiumYr"></paper-input>
+            <paper-input label="投资年数" [ngModel]="model.premiumYr+''" (ngModelChange)="model.premiumYr=$event"></paper-input>
         </div>
         <div class="col-sm-3">
             <paper-button raised (click)="CalcInvestYear()" [disabled]="!canCalcInvestYr()">Calc</paper-button>
@@ -35,12 +35,12 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            <paper-input label="累计现金" disabled [(ngModel)]="model.minAccumulation"></paper-input>
+            <paper-input label="累计现金" disabled [ngModel]="model.minAccumulation"></paper-input>
         </div>        
     </div>
     <div class="row">
         <div class="col-sm-9">
-            <paper-input label="每年取钱" [(ngModel)]="model.withDrawAmt"></paper-input>
+            <paper-input label="每年取钱" [ngModel]="model.withDrawAmt+''" (ngModelChange)="model.withDrawAmt=$event"></paper-input>
         </div>
         <div class="col-sm-3">
             <paper-button raised (click)="calcWithDrawAmnt()" [disabled]="!canCalcWithDrawAmnt()">Calc</paper-button>
@@ -48,7 +48,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            <paper-input label="取钱年数" [(ngModel)]="model.withDrawYr"></paper-input>
+            <paper-input label="取钱年数" [ngModel]="model.withDrawYr+''" (ngModelChange)="model.withDrawYr=$event"></paper-input>
         </div>
         <div class="col-sm-3">
             <paper-button raised (click)="calcWithDrawYear()"  [disabled]="!canCalsWithDrawYr()">Calc</paper-button>
@@ -56,7 +56,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9">
-            <paper-input label="剩余" disabled [(ngModel)]="model.remaining"></paper-input>
+            <paper-input label="剩余" disabled [ngModel]="model.remaining"></paper-input>
         </div>        
     </div>
 </div>
